@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="한국 고등학생을 위한 나만의 MBTI 성격 유형 검사! 40개의 학교생활 맞춤 질문으로 나의 성격 유형을 알아보세요.">
+    <meta name="keywords" content="MBTI, 성격유형검사, 고등학생, 한국, 무료, 성격테스트">
+    <title>나만의 MBTI 검사기 | 고등학생 맞춤 성격 유형 테스트</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ===== PARTICLES BACKGROUND ===== -->
+    <div class="particles-bg" id="particles-bg" aria-hidden="true"></div>
+
+    <!-- ===== THEME TOGGLE ===== -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="다크/라이트 모드 전환" title="테마 전환">
+        <span class="theme-icon theme-icon--light">☀️</span>
+        <span class="theme-icon theme-icon--dark">🌙</span>
+    </button>
+
+    <!-- ================================================================ -->
+    <!-- SECTION 1: INTRO / LANDING                                       -->
+    <!-- ================================================================ -->
+    <section id="intro" class="screen screen--active">
+        <div class="intro">
+            <div class="intro__badge">🧠 MBTI 성격 유형 검사</div>
+            <h1 class="intro__title">
+                나는 어떤 <span class="text-gradient">성격 유형</span>일까?
+            </h1>
+            <p class="intro__subtitle">
+                한국 고등학생 맞춤형 40문항으로<br>
+                나만의 MBTI를 발견해 보세요!
+            </p>
+
+            <div class="intro__info-cards">
+                <div class="info-card glass-card">
+                    <span class="info-card__icon">⏱️</span>
+                    <span class="info-card__label">소요 시간</span>
+                    <span class="info-card__value">약 7~8분</span>
+                </div>
+                <div class="info-card glass-card">
+                    <span class="info-card__icon">📝</span>
+                    <span class="info-card__label">총 문항 수</span>
+                    <span class="info-card__value">40문항</span>
+                </div>
+                <div class="info-card glass-card">
+                    <span class="info-card__icon">🎯</span>
+                    <span class="info-card__label">결과 유형</span>
+                    <span class="info-card__value">16가지</span>
+                </div>
+            </div>
+
+            <div class="intro__tips glass-card">
+                <h2 class="intro__tips-title">📌 검사 전 알아두세요!</h2>
+                <ul class="intro__tips-list">
+                    <li>솔직하게 답변할수록 정확한 결과가 나와요.</li>
+                    <li>정답은 없으니 너무 오래 고민하지 마세요.</li>
+                    <li>가능하면 '보통'은 피해주세요!</li>
+                </ul>
+            </div>
+
+            <button class="btn btn--primary btn--glow" id="btn-start">
+                <span>검사 시작하기</span>
+                <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SECTION 2: QUIZ                                                   -->
+    <!-- ================================================================ -->
+    <section id="quiz" class="screen">
+        <div class="quiz">
+            <!-- Progress bar -->
+            <div class="quiz__progress">
+                <div class="quiz__progress-bar">
+                    <div class="quiz__progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="quiz__progress-text">
+                    <span id="progress-current">1</span> / <span id="progress-total">40</span>
+                </div>
+            </div>
+
+            <!-- Question card -->
+            <div class="quiz__card glass-card" id="quiz-card">
+                <div class="quiz__dimension-badge" id="dimension-badge">에너지</div>
+                <p class="quiz__question" id="quiz-question">질문이 여기에 표시됩니다.</p>
+
+                <!-- 7-point Likert scale -->
+                <div class="likert" id="likert-scale">
+                    <span class="likert__label likert__label--agree">동의</span>
+                    <div class="likert__buttons">
+                        <button class="likert__btn likert__btn--3a" data-value="7" aria-label="매우 동의"></button>
+                        <button class="likert__btn likert__btn--2a" data-value="6" aria-label="동의"></button>
+                        <button class="likert__btn likert__btn--1a" data-value="5" aria-label="약간 동의"></button>
+                        <button class="likert__btn likert__btn--0"  data-value="4" aria-label="보통"></button>
+                        <button class="likert__btn likert__btn--1d" data-value="3" aria-label="약간 비동의"></button>
+                        <button class="likert__btn likert__btn--2d" data-value="2" aria-label="비동의"></button>
+                        <button class="likert__btn likert__btn--3d" data-value="1" aria-label="매우 비동의"></button>
+                    </div>
+                    <span class="likert__label likert__label--disagree">비동의</span>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="quiz__nav">
+                <button class="btn btn--secondary" id="btn-prev" disabled>
+                    <svg class="btn__arrow btn__arrow--left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    <span>이전</span>
+                </button>
+                <button class="btn btn--primary" id="btn-next" disabled>
+                    <span>다음</span>
+                    <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SECTION 3: LOADING / ANALYZING                                    -->
+    <!-- ================================================================ -->
+    <section id="loading" class="screen">
+        <div class="loading">
+            <div class="loading__orb">
+                <div class="loading__ring loading__ring--1"></div>
+                <div class="loading__ring loading__ring--2"></div>
+                <div class="loading__ring loading__ring--3"></div>
+                <div class="loading__core">🧬</div>
+            </div>
+            <h2 class="loading__title">성격 분석 중...</h2>
+            <p class="loading__subtitle" id="loading-text">당신의 응답을 분석하고 있어요</p>
+            <div class="loading__dots">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SECTION 4: RESULT                                                 -->
+    <!-- ================================================================ -->
+    <section id="result" class="screen">
+        <div class="result">
+            <!-- Type hero -->
+            <div class="result__hero glass-card" id="result-hero">
+                <div class="result__badge" id="result-role-group">분석가형</div>
+                <div class="result__emoji" id="result-emoji">🧠</div>
+                <h1 class="result__type-code" id="result-code">INTJ</h1>
+                <h2 class="result__type-name" id="result-name">전략가</h2>
+                <p class="result__subtitle" id="result-subtitle">상상력이 풍부한 전략적 사고가</p>
+            </div>
+
+            <!-- Dimension bars -->
+            <div class="result__dimensions glass-card">
+                <h3 class="result__section-title">📊 차원별 성향</h3>
+                <div class="dimension-bars" id="dimension-bars">
+                    <!-- dynamically generated -->
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="result__description glass-card">
+                <h3 class="result__section-title">📖 성격 설명</h3>
+                <p id="result-description"></p>
+            </div>
+
+            <!-- Strengths & Weaknesses -->
+            <div class="result__traits">
+                <div class="result__trait-card glass-card">
+                    <h3 class="result__section-title">💪 강점</h3>
+                    <ul id="result-strengths"></ul>
+                </div>
+                <div class="result__trait-card glass-card">
+                    <h3 class="result__section-title">⚠️ 약점</h3>
+                    <ul id="result-weaknesses"></ul>
+                </div>
+            </div>
+
+            <!-- School life -->
+            <div class="result__school glass-card">
+                <h3 class="result__section-title">🏫 학교생활</h3>
+                <p id="result-school-life"></p>
+                <h4>📚 공부 팁</h4>
+                <p id="result-study-tip"></p>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="result__recommendations">
+                <div class="result__rec-card glass-card">
+                    <h3 class="result__section-title">🎯 추천 동아리</h3>
+                    <div class="tags" id="result-clubs"></div>
+                </div>
+                <div class="result__rec-card glass-card">
+                    <h3 class="result__section-title">🚀 추천 진로</h3>
+                    <div class="tags" id="result-careers"></div>
+                </div>
+            </div>
+
+            <!-- Compatibility -->
+            <div class="result__compatibility glass-card">
+                <h3 class="result__section-title">💕 궁합 유형</h3>
+                <div class="compat-cards" id="result-compat">
+                    <!-- dynamically generated -->
+                </div>
+            </div>
+
+            <!-- Famous people -->
+            <div class="result__famous glass-card">
+                <h3 class="result__section-title">⭐ 같은 유형의 유명인</h3>
+                <div class="tags" id="result-famous"></div>
+            </div>
+
+            <!-- Actions -->
+            <div class="result__actions">
+                <button class="btn btn--primary btn--glow" id="btn-restart">
+                    <span>다시 검사하기</span>
+                </button>
+                <button class="btn btn--secondary" id="btn-copy-result">
+                    <span>결과 링크 복사</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="questions.js"></script>
+    <script src="results.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
